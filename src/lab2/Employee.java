@@ -34,6 +34,7 @@ public class Employee {
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setSsn(ssn);
+        
     }
 
     // Assume this must be performed first, and assume that an employee
@@ -172,4 +173,13 @@ public void setFirstName(String firstName) {
 
     public void setOrientationDate(Date orientationDate) {
         this.orientationDate = orientationDate;
-    }}
+    }
+    public void reqruitingAnEmployee(Employee emp){
+        this.meetWithHrForBenefitAndSalryInfo();
+        this.meetDepartmentStaff();
+        this.reviewDeptPolicies();
+        this.moveIntoCubicle(cubeId);
+    }
+       
+   
+}
