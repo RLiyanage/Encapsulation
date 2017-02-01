@@ -31,29 +31,29 @@ public class Employee {
     private Date orientationDate;
 
     public Employee(String firstName, String lastName, String ssn) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.ssn = ssn;
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setSsn(ssn);
     }
 
     // Assume this must be performed first, and assume that an employee
     // would only do this once, upon being hired.
     public void meetWithHrForBenefitAndSalryInfo() {
         metWithHr = true;
-        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        String fmtDate = sdf.format(orientationDate);        
+        //SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+        //String fmtDate = sdf.format(orientationDate);        
         System.out.println(firstName + " " + lastName + " met with Hr on "
-            + fmtDate);
+            + getFormatedDate());
     }
 
     // Assume this must be performed first, and assume that an employee
     // would only do this once, upon being hired.:
     public void meetDepartmentStaff() {
         metDeptStaff = true;
-        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        String fmtDate = sdf.format(orientationDate);        
+        //SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+        //String fmtDate = sdf.format(orientationDate);        
         System.out.println(firstName + " " + lastName + " met with Dept. Staff on "
-            + fmtDate);
+            + getFormatedDate());
     }
 
     // Assume this must be performed third. And assume that because department
@@ -61,10 +61,10 @@ public class Employee {
     // independently from other classes.
     public void reviewDeptPolicies() {
         reviewedDeptPolicies = true;
-        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        String fmtDate = sdf.format(orientationDate);        
+        //SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+        //String fmtDate = sdf.format(orientationDate);        
         System.out.println(firstName + " " + lastName + " reviewed Dept policies on "
-            + fmtDate);
+            + getFormatedDate());
     }
 
     // Assume this must be performed 4th. And assume that because employees
@@ -73,10 +73,15 @@ public class Employee {
     public void moveIntoCubicle(String cubeId) {
         this.cubeId = cubeId;
         this.movedIn = true;
-        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        String fmtDate = sdf.format(orientationDate);        
+        //SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+        //String fmtDate = sdf.format(orientationDate);        
         System.out.println(firstName + " " + lastName + " moved into cubicle "
-                + cubeId + " on " + fmtDate);
+                + cubeId + " on " + getFormatedDate());
+    }
+    
+    private String getFormatedDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+        return sdf.format(orientationDate);
     }
 
     public String getFirstName() {
@@ -86,8 +91,12 @@ public class Employee {
     // setter methods give the developer the power to control what data is
     // allowed through validation.
     
-    public void setFirstName(String firstName) {
-       this.firstName = firstName;
+public void setFirstName(String firstName) {
+        if (firstName == null || firstName.isEmpty()) {
+            System.out.println("Please enter name again");
+        } else {
+            this.firstName = firstName;
+        } 
     }
 
     public String getLastName() {
@@ -95,7 +104,12 @@ public class Employee {
     }
 
     public void setLastName(String lastName) {
-       this.lastName = lastName;
+        if (lastName != null && !lastName.isEmpty()){
+            this.lastName = lastName;
+            } else
+        {
+            System.out.println("Please enter valid last name");
+        }  
     }
 
     public String getSsn() {
@@ -103,7 +117,11 @@ public class Employee {
     }
 
     public void setSsn(String ssn) {
+        if (ssn != null && ssn.length() == 9){
         this.ssn = ssn;
+        } else {
+            System.out.println("Please enter valid ssn number");
+        }
     }
 
     public boolean isMetWithHr() {

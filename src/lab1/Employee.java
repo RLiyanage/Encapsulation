@@ -53,10 +53,12 @@ public class Employee {
     }
 
     public void setLastName(String lastName) {
-        if (firstName == null || firstName.isEmpty()) {
-            System.out.println("Please enter name  again");
+        if (lastName != null && !lastName.isEmpty() ) {
             this.lastName = lastName;
+        } else {
+            System.out.println("Please enter the valid name");
         }
+        
     }
 
     public String getSsn() {
