@@ -18,6 +18,7 @@ import java.util.Date;
  * @version 1.02
  */
 public class Employee {
+
     private String firstName;
     private String lastName;
     private String ssn;
@@ -37,7 +38,7 @@ public class Employee {
 
     // Assume this must be performed first, and assume that an employee
     // would only do this once, upon being hired.
-    public void meetWithHrForBenefitAndSalryInfo() {
+    private void meetWithHrForBenefitAndSalryInfo() {
         metWithHr = true;
         //SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
         //String fmtDate = sdf.format(orientationDate);        
@@ -47,7 +48,7 @@ public class Employee {
 
     // Assume this must be performed first, and assume that an employee
     // would only do this once, upon being hired.:
-    public void meetDepartmentStaff() {
+    private void meetDepartmentStaff() {
         metDeptStaff = true;
         //SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
         //String fmtDate = sdf.format(orientationDate);        
@@ -70,12 +71,16 @@ public class Employee {
     // sometimes change office locations that this method may need to be called 
     // independently from other classes.
     public void moveIntoCubicle(String cubeId) {
-        this.cubeId = cubeId;
-        this.movedIn = true;
-        //SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        //String fmtDate = sdf.format(orientationDate);        
-        System.out.println(firstName + " " + lastName + " moved into cubicle "
-                + cubeId + " on " + getFormatedDate());
+        if (cubeId == null || cubeId.isEmpty()) {
+            System.out.println("Please enter the cube Id again");
+        } else {
+            this.cubeId = cubeId;
+            this.movedIn = true;
+            //SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+            //String fmtDate = sdf.format(orientationDate);        
+            System.out.println(firstName + " " + lastName + " moved into cubicle "
+                    + cubeId + " on " + getFormatedDate());
+        }
     }
 
     private String getFormatedDate() {
@@ -159,9 +164,6 @@ public class Employee {
     }
 
     public void setCubeId(String cubeId) {
-        if(cubeId  == null ||cubeId.isEmpty()){
-            System.out.println("Please enter the cube Id again"); 
-        }
         this.cubeId = cubeId;
     }
 
@@ -177,7 +179,7 @@ public class Employee {
         }
     }
 
-    public void doOrienation() {
+    public void doOrienation(String cubeID) {
         this.meetWithHrForBenefitAndSalryInfo();
         this.meetDepartmentStaff();
         this.reviewDeptPolicies();
